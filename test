@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Detection</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://th.bing.com/th/id/OIP.tKe2sQMwrAxsWvvlz67vcQHaHa?w=193&h=193&c=7&r=0&o=5&dpr=1.3&pid=1.7') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: rgb(181, 15, 43);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with images section */
+        .header-with-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .header-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* File upload and button styles */
+        .file-upload {
+            margin-bottom: 20px;
+            text-align: center; /* Center the content */
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload label {
+            display: inline-block;
+            background-color: rgb(181, 15, 43);
+            color: #fff;
+            padding: 15px 29px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 19px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .file-upload label:hover {
+            background-color: #0056b3;
+        }
+
+        button {
+            background-color: rgb(181, 15, 43);
+            color: #fff;
+            padding: 15px 29px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 19px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Result section */
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #0a0909;
+            text-align: center;
+        }
+
+        .result-image {
+            max-width: 90%;
+            height: auto;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Upload success message style */
+        #uploadMessage {
+            margin-top: 10px; /* Space between button and message */
+            font-size: 16px;
+            color: green; /* Change the color to green for success */
+        }
+
+        /* Doctors section styles */
+        .doctors {
+            margin-top: 40px;
+            text-align: left; /* Align text to the left */
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor {
+            display: flex; /* Use flex for image and text alignment */
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .doctor:last-child {
+            border-bottom: none; /* Remove bottom border for the last item */
+        }
+
+        .doctor img {
+            width: 80px; /* Set width for doctor images */
+            height: 80px; /* Set height for doctor images */
+            object-fit: cover;
+            border-radius: 50%; /* Make images circular */
+            margin-right: 15px; /* Space between image and text */
+        }
+
+        .doctor h3 {
+            margin: 0;
+            font-size: 18px;
+            color: rgb(181, 15, 43);
+        }
+
+        .doctor p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        /* Demo section styles */
+        main {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        main h2,
+        main h3 {
+            color: rgb(181, 15, 43);
+        }
+
+        .results {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(181, 15, 43);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Skin Cancer Detection</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Header with images and text -->
+        <div class="header-with-images">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0_VLn1Da8P-smcPSNstEooMP33ujPGUgcog&s" alt="Left image" class="header-image">
+            <div class="header-text"><b>Upload an Image for Detection</b></div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0bw29W3Bdtf4NQYgoGPzKpUy5eN61cFC6Uw&s" alt="Right image" class="header-image">
+        </div>
+
+        <!-- File upload and prediction button -->
+        <div class="file-upload">
+            <input type="file" id="fileInput" accept="image/*" capture="camera">
+            <label for="fileInput">Choose File or Capture Image</label>
+            <div id="uploadMessage"></div> <!-- Upload success message here -->
+        </div>
+        <button id="predictButton">Predict Result</button>
+
+        <!-- Result output area -->
+        <div id="result"></div>
+        <div id="imageContainer"></div> <!-- Image container for displaying uploaded image -->
+    </div>
+
+    <main>
+        <h2>How the Prediction Works</h2>
+        <p>This demo will guide you through the process of how our skin cancer detection system works. Follow the steps below:</p>
+        
+        <ol>
+            <li>Upload an image of your skin.</li>
+            <li>Our model will analyze the image.</li>
+            <li>You will receive a prediction result indicating the likelihood of skin cancer.</li>
+        </ol>
+
+        <h3>Try It Out!</h3>
+        <form action="predict.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="skin_image" accept="image/*" required>
+            <button type="submit">Submit for Prediction</button>
+        </form>
+
+        <h3>Example Results</h3>
+        <div class="results">
+            <p><strong>Result 1:</strong> Benign (Not Cancerous)</p>
+            <p><strong>Result 2:</strong> Malignant (Cancerous)</p>
+            <p><strong>Result 3:</strong> Requires Further Analysis</p>
+        </div>
+    </main>
+
+    <!-- Doctors Contact Information Section -->
+    <div class="doctors">
+        <h2>Contact Skin Cancer Specialists</h2>
+        <div class="doctor">
+            <img src="data:image/jpeg;base64,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" alt="Dr. Ramakant Deshpande MBBS, MS – General Surgery, FICS, FAIS, DHA"> <!-- Replace with actual image link -->
+            <div>
+                <h3>Dr. Ramakant Deshpande</h3>
+                <p>MBBS, MS – General Surgery, FICS, FAIS, DHA</p>
+                <p>Specialist in skin-related issues.</p>
+            </div>
+        </div>
+        <div class="doctor">
+            <img src="https://cdn-cpilg.nitrocdn.com/AUXIVIQtsIdjcKgcKxCkSmSPjQBhKiDP/assets/images/optimized/rev-36317f8/www.medicoexperts.com/wp-content/uploads/2021/12/dr-sanjay-sharma-surgical-oncologist.jpg" alt="Dr. Sudhir Kumar Sharma MD, DM - Medical Oncologist"> <!-- Replace with actual image link -->
+            <div>
+                <h3>Dr. Sudhir Kumar Sharma</h3>
+                <p>MD, DM - Medical Oncologist</p>
+                <p>Expert in cancer diagnosis and treatment.</p>
+            </div>
+        </div>
+        <div class="doctor">
+            <img src="https://cdn-cpilg.nitrocdn.com/AUXIVIQtsIdjcKgcKxCkSmSPjQBhKiDP/assets/images/optimized/rev-36317f8/www.medicoexperts.com/wp-content/uploads/2022/01/Dr.-Anil-D-Cruz.jpg" alt="Dr. Neeta Khedkar DNB, FRCP - Dermatologist"> <!-- Replace with actual image link -->
+            <div>
+                <h3>Dr. Neeta Khedkar</h3>
+                <p>DNB, FRCP - Dermatologist</p>
+                <p>Specialist in skin diseases and treatments.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Skin Cancer Detection Project</p>
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const predictButton = document.getElementById('predictButton');
+        const resultDiv = document.getElementById('result');
+        const imageContainer = document.getElementById('imageContainer');
+        const uploadMessage = document.getElementById('uploadMessage');
+
+        // Add event listener for predicting results
+        predictButton.addEventListener('click', function () {
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please upload the image first!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgData = e.target.result;
+                displayImage(imgData);
+                
+                // Simulate prediction based on a random selection
+                const predictions = [
+                    "Melanoma - High Risk. Please consult a dermatologist.",
+                    "Squamous Cell Carcinoma - Moderate Risk. Immediate attention recommended.",
+                    "Basal Cell Carcinoma - Low Risk. Regular monitoring advised.",
+                    "Benign Lesion - No immediate concern, but keep monitoring."
+                ];
+                const randomPrediction = predictions[Math.floor(Math.random() * predictions.length)];
+                displayPredictionResult(randomPrediction);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function displayImage(imageUrl) {
+            imageContainer.innerHTML = ''; // Clear previous images
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            imgElement.classList.add("result-image");
+            imageContainer.appendChild(imgElement);
+        }
+
+        function displayPredictionResult(prediction) {
+            resultDiv.innerText = prediction;
+        }
+
+        // File input change event to show success message
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0];
+            if (file) {
+                uploadMessage.textContent = 'File uploaded successfully!';
+            } else {
+                uploadMessage.textContent = ''; // Clear message if no file
+            }
+        });
+    </script>
+</body>
+
+</html>

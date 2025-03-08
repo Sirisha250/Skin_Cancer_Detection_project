@@ -1,0 +1,30 @@
+import java.util.*;
+
+class ColorsFreq{
+    public static void main(String[] args){
+        String arr[]={"Red","White","Red","Green","Blue","Red","White"};
+        int red=0;
+        int white=0;
+        int green=0;
+        int blue=0;
+        for(int i=0;i<7;i++){
+            if(arr[i]=="Red"){
+                red=red+1;
+            };
+            if(arr[i]=="White"){
+                white=white+1;
+                
+            };
+            if(arr[i]=="Green"){
+                green=green+1;
+            };
+            if(arr[i]=="Blue"){
+                blue+=1;
+            };
+        }
+        System.out.println("Red freq: "+red);
+        System.out.println("White freq: "+white);
+        System.out.println("Green freq: "+green);
+        System.out.println("Blue freq: "+blue);
+    }
+}
